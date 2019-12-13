@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using ProAgil.Api.Model;
 
 namespace ProAgil.Api.Controllers
 {
@@ -12,9 +13,49 @@ namespace ProAgil.Api.Controllers
     public class ValuesController : ControllerBase
     {
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<IEnumerable<Evento>> Get()
         {
-            return new string[] { "valor1", "valor2", "valor3"};
+            return new Evento[] { 
+                new Evento() {
+                    EventoId = 1,
+                    Tema = "Projeto Angular com .NET Core",
+                    Local = "Mateus Leme",
+                    Lote = "1º Lote",
+                    QtdPessoas = 250,
+                    DataEnvio = DateTime.Now.AddDays(2).ToString("dd/MM/yyyy"),
+                },
+                new Evento() {
+                    EventoId = 2,
+                    Tema = "Curso de Progrmação",
+                    Local = "Contagem",
+                    Lote = "2º Lote",
+                    QtdPessoas = 380,
+                    DataEnvio = DateTime.Now.AddDays(2).ToString("dd/MM/yyyy"),
+                }
+            };
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult<Evento> Get(int id)
+        {
+            return new Evento[] { 
+                new Evento() {
+                    EventoId = 1,
+                    Tema = "Projeto Angular com .NET Core",
+                    Local = "Mateus Leme",
+                    Lote = "1º Lote",
+                    QtdPessoas = 250,
+                    DataEnvio = DateTime.Now.AddDays(2).ToString("dd/MM/yyyy"),
+                },
+                new Evento() {
+                    EventoId = 2,
+                    Tema = "Curso de Progrmação",
+                    Local = "Contagem",
+                    Lote = "2º Lote",
+                    QtdPessoas = 380,
+                    DataEnvio = DateTime.Now.AddDays(2).ToString("dd/MM/yyyy"),
+                }
+            }.FirstOrDefault(x => x.EventoId == id);
         }
 
         private static readonly string[] Summaries = new[]
