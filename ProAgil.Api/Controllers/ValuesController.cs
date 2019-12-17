@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using ProAgil.Api.Data;
 using ProAgil.Api.Model;
 
 namespace ProAgil.Api.Controllers
@@ -12,52 +13,27 @@ namespace ProAgil.Api.Controllers
     [Route("api/[controller]")]
     public class ValuesController : ControllerBase
     {
+        public DataContext _context { get; }
+
+        public ValuesController(DataContext context)
+        {
+            _context = context;
+
+        }
+
         [HttpGet]
         public ActionResult<IEnumerable<Evento>> Get()
         {
-            return new Evento[] { 
-                new Evento() {
-                    EventoId = 1,
-                    Tema = "Projeto Angular com .NET Core",
-                    Local = "Mateus Leme",
-                    Lote = "1º Lote",
-                    QtdPessoas = 250,
-                    DataEnvio = DateTime.Now.AddDays(2).ToString("dd/MM/yyyy"),
-                },
-                new Evento() {
-                    EventoId = 2,
-                    Tema = "Curso de Progrmação",
-                    Local = "Contagem",
-                    Lote = "2º Lote",
-                    QtdPessoas = 380,
-                    DataEnvio = DateTime.Now.AddDays(2).ToString("dd/MM/yyyy"),
-                }
-            };
+            return _context.Eventos.ToList();
         }
 
         [HttpGet("{id}")]
         public ActionResult<Evento> Get(int id)
         {
-            return new Evento[] { 
-                new Evento() {
-                    EventoId = 1,
-                    Tema = "Projeto Angular com .NET Core",
-                    Local = "Mateus Leme",
-                    Lote = "1º Lote",
-                    QtdPessoas = 250,
-                    DataEnvio = DateTime.Now.AddDays(2).ToString("dd/MM/yyyy"),
-                },
-                new Evento() {
-                    EventoId = 2,
-                    Tema = "Curso de Progrmação",
-                    Local = "Contagem",
-                    Lote = "2º Lote",
-                    QtdPessoas = 380,
-                    DataEnvio = DateTime.Now.AddDays(2).ToString("dd/MM/yyyy"),
-                }
-            }.FirstOrDefault(x => x.EventoId == id);
+            return _context.Eventos.FirstOrDefault(x => x.EventoId == id);
         }
 
+        /*
         private static readonly string[] Summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
