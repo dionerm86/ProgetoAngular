@@ -42,8 +42,12 @@ namespace ProAgil.Api
 
             //app.UseHttpsRedirection();
 
+            //app.UseCors é um controle de segurança
             app.UseCors( x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseRouting();
+
+            //o app.UseStaticFiles serve para que a API encontre imagens no server
+            app.UseStaticFiles();
 
             app.UseAuthorization();
 

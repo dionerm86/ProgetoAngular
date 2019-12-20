@@ -13,5 +13,7 @@ namespace ProAgil.Api.Model
         public int QtdPessoas { get; set; }
 
         public string Lote { get; set; }
+
+        public string imagemUrl { get; set; }
     }
 }
