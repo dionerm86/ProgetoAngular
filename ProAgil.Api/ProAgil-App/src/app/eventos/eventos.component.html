@@ -1,8 +1,13 @@
 
 <div class="form-inline">
+<!-- 
+    O TwoWay DataBind não funciona em form simples, então o form foi alterado para div.
+    Caso dê erro no ngModel, só dar um espaço e removê-lo 
+-->
   <div class="form-group mb-2">
-    <input type="text" class="form-control mr-2" placeholder="Buscar" [(ngModel)]="filtroLista">
-    <button class="btn btn-outline-seccess">Buscar</button>
+    <label class="mr-2">Filtro:</label>
+    <input type="text" class="form-control mr-2" placeholder="Buscar" 
+    [(ngModel)]="filtroLista">
   </div>
 </div>
 <h3>Filtro: {{filtroLista}}</h3>
