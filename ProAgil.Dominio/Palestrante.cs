@@ -1,0 +1,25 @@
+using System.Collections.Generic;
+
+namespace ProAgil.Dominio
+{
+    public class Palestrante
+    {
+        public int Id { get; set; }
+
+        public string Nome { get; set; }
+
+        public string MiniCurriculo { get; set; }
+
+        public string ImagemUrl { get; set; }
+
+        public string Telefone { get; set; }
+
+        public string Email { get; set; }
+
+        public List<RedeSocial> RedesSociais { get; set; }
+
+        public int MyProperty { get; set; }
+
+        public List<PalestranteEvento> PalestranteEvento { get; set; }
+    }
+}
