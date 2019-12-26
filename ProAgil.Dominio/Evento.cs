@@ -16,7 +16,7 @@ namespace ProAgil.Dominio
 
         public int QtdPessoas { get; set; }
 
-        public string imagemUrl { get; set; }
+        public string imagemURL { get; set; }
 
         public string Email { get; set; }
         
@@ -26,6 +26,6 @@ namespace ProAgil.Dominio
 
         public List<RedeSocial> RedesSociais { get; set; }
 
-        public List<PalestranteEvento> PalestranteEvento { get; set; }
+        public List<PalestranteEvento> PalestrantesEventos { get; set; }
     }
 }

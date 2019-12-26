@@ -10,7 +10,7 @@ namespace ProAgil.Dominio
 
         public string MiniCurriculo { get; set; }
 
-        public string ImagemUrl { get; set; }
+        public string ImagemURL { get; set; }
 
         public string Telefone { get; set; }
 
@@ -20,6 +20,6 @@ namespace ProAgil.Dominio
 
         public int MyProperty { get; set; }
 
-        public List<PalestranteEvento> PalestranteEvento { get; set; }
+        public List<PalestranteEvento> PalestrantesEventos { get; set; }
     }
 }
