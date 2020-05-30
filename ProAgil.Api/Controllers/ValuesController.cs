@@ -20,7 +20,6 @@ namespace ProAgil.Api.Controllers
         public ValuesController(DataContext context)
         {
             _context = context;
-
         }
 
         [HttpGet]
@@ -35,8 +34,7 @@ namespace ProAgil.Api.Controllers
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
                     "Banco de Dados Falhou!");
-            }
-            
+            }            
         }
 
         [HttpGet("{id}")]
@@ -51,8 +49,7 @@ namespace ProAgil.Api.Controllers
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
                     "Banco de Dados Falhou!");
-            }
-            
+            }            
         }
 
         /*
