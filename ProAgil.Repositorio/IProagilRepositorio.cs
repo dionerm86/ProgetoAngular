@@ -5,6 +5,7 @@ namespace ProAgil.Repositorio
 {
     public interface IProagilRepositorio
     {
+        //Geral
          void Add<T>(T entity) where T : class;
 
          void Update<T>(T entity) where T : class;
@@ -14,19 +15,19 @@ namespace ProAgil.Repositorio
         Task<bool> SaveChangesAsync();
 
         #region Eventos
-        Task<Evento[]> GetEventosAsyncByTema(string Tema, bool includePalestrantes);
+        Task<Evento[]> GetAllEventosAsyncByTema(string tema, bool includePalestrantes);
 
         Task<Evento[]> GetEventosAsync(bool includePalestrantes);
 
-        Task<Evento[]> GetEventoSyncById(int EventoId, bool includePalestrantes);
+        Task<Evento> GetEventoSyncById(int EventoId, bool includePalestrantes);
         
         #endregion
 
         #region Palestrantes
 
-        Task<Evento[]> GetPalestrantesAsyncByName(bool includePalestrantes);
+        Task<Palestrante[]> GetPalestrantesAsyncByName(string name, bool IncludeEvento);
 
-        Task<Evento> GetPalestranteAsync(int PalestranteId, bool includePalestrantes);
+        Task<Palestrante> GetPalestranteAsync(int PalestranteId, bool includePalestrantes);
 
         #endregion
 
