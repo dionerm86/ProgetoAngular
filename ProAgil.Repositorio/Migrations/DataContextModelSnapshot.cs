@@ -22,7 +22,7 @@ namespace ProAgil.Repositorio.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("DataEnvio")
+                    b.Property<DateTime>("DataEvento")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")

@@ -34,7 +34,7 @@ namespace ProAgil.Repositorio
             return (await _context.SaveChangesAsync()) > 0;
         }
 
-        public async Task<Evento[]> GetAllEventosAsync(int eventoId, bool includePalestrantes = false)
+        public async Task<Evento[]> GetAllEventosAsync(bool includePalestrantes = false)
         {
             IQueryable<Evento> query = _context.Eventos
             .Include(c => c.Lotes)

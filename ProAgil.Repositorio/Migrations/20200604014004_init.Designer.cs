@@ -9,7 +9,7 @@ using ProAgil.Repositorio;
 namespace ProAgil.Repositorio.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20191226165828_init")]
+    [Migration("20200604014004_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,7 +24,7 @@ namespace ProAgil.Repositorio.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("DataEnvio")
+                    b.Property<DateTime>("DataEvento")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")

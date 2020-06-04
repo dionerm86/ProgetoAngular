@@ -1,12 +1,12 @@
 
 <div class="form-inline">
-<!-- 
+<!--
     O TwoWay DataBind não funciona em form simples, então o form foi alterado para div.
-    Caso dê erro no ngModel, só dar um espaço e removê-lo 
+    Caso dê erro no ngModel, só dar um espaço e removê-lo
 -->
   <div class="form-group mb-2">
     <label class="mr-2">Filtro:</label>
-    <input type="text" class="form-control mr-2" placeholder="Buscar" 
+    <input type="text" class="form-control mr-2" placeholder="Buscar"
     [(ngModel)]="filtroLista">
   </div>
 </div>
@@ -28,16 +28,16 @@
   </thead>
   <tbody *ngIf="eventos && eventos.length">
     <tr *ngFor="let e of eventosFiltrados">
-      <td> 
-        <img *ngIf="exibirImagem" 
+      <td>
+        <img *ngIf="exibirImagem"
         src="http://localhost:5000/img/{{ e.imagemUrl }}"
         [style.width.px]="imgLargura"
-        [style.margin.px]="imgMargem"> 
+        [style.margin.px]="imgMargem">
       </td>
       <td> {{ e.eventoId }} </td>
       <td> {{ e.tema }} </td>
       <td> {{ e.local }} </td>
-      <td> {{ e.dataEnvio }} </td>
+      <td> {{ e.dataEvento }} </td>
       <td> {{ e.qtdPessoas }} </td>
       <td> {{ e.lote }} </td>
       <td>
