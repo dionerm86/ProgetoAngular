@@ -11,12 +11,11 @@ namespace ProAgil.Api.Controllers
     public class PalestranteController : ControllerBase
     {
         private readonly IProagilRepositorio _repos;
-
+        
         public PalestranteController(IProagilRepositorio repos)
         {
             _repos = repos;
         }
-
 
         [HttpGet("{PalestranteId}")]
         public async Task<IActionResult> Get(int PalestranteId) 
@@ -121,7 +120,5 @@ namespace ProAgil.Api.Controllers
 
             return BadRequest("Erro na Requisição!!!");
         }
-
-
     }
 }
