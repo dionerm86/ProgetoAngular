@@ -18,8 +18,6 @@ namespace ProAgil.Dominio
 
         public List<RedeSocial> RedesSociais { get; set; }
 
-        public int MyProperty { get; set; }
-
         public List<PalestranteEvento> PalestrantesEventos { get; set; }
     }
 }
