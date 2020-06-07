@@ -29,6 +29,17 @@ export class EventosComponent implements OnInit {
 
   constructor(private eventoService: EventoService) { }
 
+  obterEventos() {
+    var eventos = this.getEventos();
+
+    if (this.eventos.length === 0 || this.filtroLista === undefined){
+      return this. eventos;
+    }
+
+    return this.eventos.filter(
+      res => res.tema.toLocaleLowerCase().includes(this.filtroLista.toLocaleLowerCase()))
+  }
+
   ngOnInit() {
     this.getEventos();
   }
@@ -45,7 +56,7 @@ export class EventosComponent implements OnInit {
     }
 
     getEventos() {
-      this.eventoService.getAllEvento().subscribe(
+      this.eventoService.getAllEventos().subscribe(
         (_eventos: Evento[]) =>{
         this.eventos = _eventos;
         this.eventosFiltrados = this.eventos;

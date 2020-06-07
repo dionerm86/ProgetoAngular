@@ -20,7 +20,7 @@ export interface Evento {
 
     telefone : string;
 
-    loteLotes: Lote[];
+    lotes: Lote[];
 
     redesSociais: RedeSocial[];
 
