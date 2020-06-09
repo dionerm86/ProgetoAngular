@@ -19,10 +19,11 @@ export class EventosComponent implements OnInit {
 
   eventosFiltrados: Evento[];
   eventos: Evento[];
+  evento: Evento;
   imgLargura = 50;
   imgMargem = 2;
   exibirImagem = false;
-  modalRef: BsModalRef;
+  //modalRef: BsModalRef;
   listaEventos: any;
   registerForm: FormGroup;
 
@@ -55,8 +56,10 @@ export class EventosComponent implements OnInit {
       this.validation();
     }
 
-     openModal(template: TemplateRef<any>){
-      this.modalRef = this.modalService.show(template);
+     openModal(template: any){
+      //this.modalRef = this.modalService.show(template);
+      this.registerForm.reset();
+      template.show();
     }
 
     alternarImagem(){
@@ -98,9 +101,18 @@ export class EventosComponent implements OnInit {
     })
   }
 
-  get f() { return this.registerForm.controls; }
-
-  salvarAlteracao(){
-
+  salvarAlteracao(template: any){
+    if (this.registerForm.valid){
+      this.evento = Object.assign({}, this.registerForm.value);
+      this.eventoService.postEvento(this.evento).subscribe(
+        (novoEvento: Evento) => {
+          console.log(novoEvento);
+          template.hide();
+          this.getEventos();
+        }, error => {
+          console.log('Erro no post', error);
+        }
+      );
+    }
   }
 }
