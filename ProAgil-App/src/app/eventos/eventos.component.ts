@@ -1,7 +1,11 @@
 import { EventoService } from './../_services/evento.service';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Evento } from '../models/Evento';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalService, BsModalRef, } from 'ngx-bootstrap/modal';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { defineLocale, ptBrLocale } from 'ngx-bootstrap/chronos';
+defineLocale('pt-br', ptBrLocale);
 
 @Component({
   selector: 'app-eventos',
@@ -20,11 +24,15 @@ export class EventosComponent implements OnInit {
   exibirImagem = false;
   modalRef: BsModalRef;
   listaEventos: any;
+  registerForm: FormGroup;
 
 
   constructor(
     private eventoService: EventoService
-    ,private modalService: BsModalService) { }
+    ,private modalService: BsModalService
+    ,private localeService: BsLocaleService) {
+      this.localeService.use('pt-br')
+     }
 
   get filtroLista() {
     return this._filtroLista;
@@ -44,6 +52,7 @@ export class EventosComponent implements OnInit {
 
     ngOnInit() {
       this.getEventos();
+      this.validation();
     }
 
      openModal(template: TemplateRef<any>){
@@ -75,5 +84,23 @@ export class EventosComponent implements OnInit {
       error => {
         console.log(error);
       });
+  }
+
+  validation(){
+    this.registerForm = new FormGroup({
+      tema: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(25)]),
+      local: new FormControl('', Validators.required),
+      dataEvento: new FormControl('', Validators.required),
+      qtdPessoas: new FormControl('', [Validators.required, Validators.max(5000)]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      telefone: new FormControl('', Validators.required),
+      imagemURL: new FormControl('', Validators.required)
+    })
+  }
+
+  get f() { return this.registerForm.controls; }
+
+  salvarAlteracao(){
+
   }
 }
