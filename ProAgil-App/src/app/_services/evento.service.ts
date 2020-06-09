@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 import { Evento } from '../models/Evento';
 
 @Injectable({
-  providedIn: 'root' 
+  providedIn: 'root'
 })
 export class EventoService {
 
@@ -17,6 +17,12 @@ export class EventoService {
     return this.http.get<Evento[]>(this.baseURL);
   }
 
+
+
+
+
+
+  
   getevEventoByTema(tema: string): Observable<Evento[]>{
     return this.http.get<Evento[]>(`${this.baseURL}/getByTema/${tema}`);
   }

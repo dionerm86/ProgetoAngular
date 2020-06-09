@@ -1,6 +1,7 @@
 import { EventoService } from './../_services/evento.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Evento } from '../models/Evento';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-eventos',
@@ -12,6 +13,19 @@ export class EventosComponent implements OnInit {
   // tslint:disable-next-line:variable-name
   _filtroLista: string;
 
+  eventosFiltrados: Evento[];
+  eventos: Evento[];
+  imgLargura = 50;
+  imgMargem = 2;
+  exibirImagem = false;
+  modalRef: BsModalRef;
+  listaEventos: any;
+
+
+  constructor(
+    private eventoService: EventoService
+    ,private modalService: BsModalService) { }
+
   get filtroLista() {
     return this._filtroLista;
   }
@@ -21,29 +35,6 @@ export class EventosComponent implements OnInit {
     this.eventosFiltrados = this.filtroLista ? this.filtrarEventos(this.filtroLista) : this.eventos;
   }
 
-  eventosFiltrados: Evento[];
-  eventos: Evento[];
-  imgLargura = 50;
-  imgMargem = 2;
-  exibirImagem = false;
-
-  constructor(private eventoService: EventoService) { }
-
-  obterEventos() {
-    var eventos = this.getEventos();
-
-    if (this.eventos.length === 0 || this.filtroLista === undefined){
-      return this. eventos;
-    }
-
-    return this.eventos.filter(
-      res => res.tema.toLocaleLowerCase().includes(this.filtroLista.toLocaleLowerCase()))
-  }
-
-  ngOnInit() {
-    this.getEventos();
-  }
-
   filtrarEventos(filtrarPor: string): Evento[] {
     filtrarPor = filtrarPor.toLocaleLowerCase();
     return this.eventos.filter(
@@ -51,8 +42,27 @@ export class EventosComponent implements OnInit {
       );
     }
 
+    ngOnInit() {
+      this.getEventos();
+    }
+
+     openModal(template: TemplateRef<any>){
+      this.modalRef = this.modalService.show(template);
+    }
+
     alternarImagem(){
       this.exibirImagem = !this.exibirImagem;
+    }
+
+    obterEventos() {
+      //this.listaEventos = this.getEventos();
+
+      if (this.eventos.length === 0 || this.filtroLista === undefined){
+        return this. eventos;
+      }
+
+      return this.eventos.filter(
+        res => res.tema.toLocaleLowerCase().includes(this.filtroLista.toLocaleLowerCase()))
     }
 
     getEventos() {
