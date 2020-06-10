@@ -100,10 +100,10 @@
                 O tema é obrigatório.
               </div>
               <div *ngIf="registerForm.get('tema').hasError('minlength') && registerForm.get('tema').touched" class="invalid-feedback">
-                O tema deve conter no mínimo 4 caracteres.
+                O tema deve ter entre 4 e 25 caracteres.
               </div>
               <div *ngIf="registerForm.get('tema').hasError('maxlength') && registerForm.get('tema').touched" class="invalid-feedback">
-                O tema deve conter no máximo 25 caracteres.
+               Você ultrapassou o limite máximo 25 caracteres.
               </div>
             </div>
           </div>
