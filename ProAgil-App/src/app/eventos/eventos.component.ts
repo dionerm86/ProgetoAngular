@@ -26,6 +26,7 @@ export class EventosComponent implements OnInit {
   //modalRef: BsModalRef;
   listaEventos: any;
   registerForm: FormGroup;
+  modoSalvar: string = 'post';
 
 
   constructor(
@@ -55,6 +56,20 @@ export class EventosComponent implements OnInit {
       this.getEventos();
       this.validation();
     }
+
+
+
+  editarEvento(evento: Evento, template: any){
+    this.modoSalvar = 'put';
+    this.openModal(template);
+    this.evento = evento;
+    this.registerForm.patchValue(evento);
+  }
+
+  novoEvento(template: any){
+    this.modoSalvar = 'post';
+    this.openModal(template);
+  }
 
      openModal(template: any){
       //this.modalRef = this.modalService.show(template);
@@ -103,8 +118,9 @@ export class EventosComponent implements OnInit {
 
   salvarAlteracao(template: any){
     if (this.registerForm.valid){
-      this.evento = Object.assign({}, this.registerForm.value);
-      this.eventoService.postEvento(this.evento).subscribe(
+      if(this.modoSalvar == 'post'){
+        this.evento = Object.assign({}, this.registerForm.value);
+        this.eventoService.postEvento(this.evento).subscribe(
         (novoEvento: Evento) => {
           console.log(novoEvento);
           template.hide();
@@ -113,6 +129,19 @@ export class EventosComponent implements OnInit {
           console.log('Erro no post', error);
         }
       );
+      }
+      else {
+        this.evento = Object.assign({id : this.evento.id}, this.registerForm.value);
+        this.eventoService.putEvento(this.evento).subscribe(
+        (novoEvento: Evento) => {
+          console.log(novoEvento);
+          template.hide();
+          this.getEventos();
+        }, error => {
+          console.log('Erro no post', error);
+        }
+      );
+      }
     }
   }
 }
