@@ -27,6 +27,7 @@ export class EventosComponent implements OnInit {
   listaEventos: any;
   registerForm: FormGroup;
   modoSalvar: string = 'post';
+  bodyDeletarEvento = '';
 
 
   constructor(
@@ -52,12 +53,27 @@ export class EventosComponent implements OnInit {
       );
     }
 
-    ngOnInit() {
-      this.getEventos();
-      this.validation();
-    }
+  ngOnInit() {
+    this.getEventos();
+    this.validation();
+  }
 
+  excluirEvento(evento: Evento, template: any) {
+    this.openModal(template);
+    this.evento = evento;
+    this.bodyDeletarEvento = `Deseja relamente excluir o evento ${evento.tema} ?`;
+  }
 
+  confirmeDelete(template: any) {
+    this.eventoService.deleteEvento(this.evento.id).subscribe(
+      () => {
+          template.hide();
+          this.getEventos();
+        }, error => {
+          console.log(error);
+        }
+    );
+  }
 
   editarEvento(evento: Evento, template: any){
     this.modoSalvar = 'put';
@@ -71,37 +87,35 @@ export class EventosComponent implements OnInit {
     this.openModal(template);
   }
 
-     openModal(template: any){
-      //this.modalRef = this.modalService.show(template);
-      this.registerForm.reset();
-      template.show();
-    }
+  openModal(template: any){
+  //this.modalRef = this.modalService.show(template);
+  this.registerForm.reset();
+  template.show();
+  }
 
     alternarImagem(){
       this.exibirImagem = !this.exibirImagem;
     }
 
-    obterEventos() {
-      //this.listaEventos = this.getEventos();
-
-      if (this.eventos.length === 0 || this.filtroLista === undefined){
-        return this. eventos;
+  obterEventos() {
+     //this.listaEventos = this.getEventos();
+    if (this.eventos.length === 0 || this.filtroLista === undefined){
+       return this. eventos;
       }
+    return this.eventos.filter(
+       res => res.tema.toLocaleLowerCase().includes(this.filtroLista.toLocaleLowerCase()))
+  }
 
-      return this.eventos.filter(
-        res => res.tema.toLocaleLowerCase().includes(this.filtroLista.toLocaleLowerCase()))
-    }
-
-    getEventos() {
-      this.eventoService.getAllEventos().subscribe(
-        (_eventos: Evento[]) =>{
-        this.eventos = _eventos;
-        this.eventosFiltrados = this.eventos;
-        console.log(_eventos);
-      },
-      error => {
-        console.log(error);
-      });
+  getEventos() {
+    this.eventoService.getAllEventos().subscribe(
+      (_eventos: Evento[]) =>{
+      this.eventos = _eventos;
+      this.eventosFiltrados = this.eventos;
+      console.log(_eventos);
+    },
+    error => {
+      console.log(error);
+    });
   }
 
   validation(){
